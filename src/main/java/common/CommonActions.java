@@ -51,7 +51,7 @@ public class CommonActions {
 			Logs.log(element + " <--- has been PRESENT");
 			return true;
 		}catch(NoSuchElementException | NullPointerException e) {
-			Logs.log("ELEMENT NOT FOUND -->" + element);
+			Logs.log("ELEMENT NOT FOUND -->" + element); 
 			return false;
 		}
 	}

@@ -23,18 +23,30 @@ public class HomePage {
 	WebElement getQouteElement;
 	@FindBy(xpath = "//h3[text()='Auto Insurance']")
 	WebElement autoinsurElement;
-	@FindBy(xpath = "(//*[@class='WACIcon__Subtract'])[1]")
-	WebElement chatBoxElement;
+	//@FindBy(xpath = "(//*[@class='WACIcon__Subtract'])[1]")
+	//WebElement chatBoxElement;
 	@FindBy(xpath = "(//a[normalize-space(text())='START QUOTE'])[1]")
 	WebElement startQoutElement;
+	@FindBy(xpath = "//select[@id='LOB-select']")
+	WebElement productElement;
+	@FindBy(xpath = "//input[@id='zip']")
+	WebElement zipcodElement;
+	@FindBy(xpath = "//span[text()='GET MY QUOTE']")
+	WebElement getQoutElement;
 	
 	
 	
-	public void qouteSteps() {
+	public void qouteSteps(String product, String zipcode) {
 		click(getQouteElement);
 		click(autoinsurElement);
-		click(chatBoxElement);
+	//	click(chatBoxElement);
 		click(startQoutElement);
+		if(isPresent(productElement) && isDisplayed(productElement)) {
+			selectDropdown(productElement, product);
+		}
+		
+		input(zipcodElement, zipcode);
+		//click(getQoutElement);
 	}
 	
 
