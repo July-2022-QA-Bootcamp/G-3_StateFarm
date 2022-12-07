@@ -6,7 +6,7 @@ import base.BaseClass;
 
 public class LogInTest extends BaseClass{
 	
-	@Test
+	@Test(enabled = true)
 	public void logInTest01() {
 		logInPage.loginSteps("saleem689@yahoo.com", "Saleem.654");
 		

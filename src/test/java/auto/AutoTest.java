@@ -8,7 +8,7 @@ public class AutoTest extends BaseClass{
 
 	@Test
 	public void qouteSteps() {
-		homePage.qouteSteps();
+		homePage.qouteSteps("Auto", "11230");
 	}
 	
 	

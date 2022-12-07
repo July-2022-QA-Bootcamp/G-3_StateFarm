@@ -8,6 +8,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import pages.CustomerPage;
 import pages.HomePage;
 import pages.LogInPage;
 import utils.Configuration;
@@ -20,6 +21,7 @@ public class BaseClass {
 	WebDriver driver;
 	protected HomePage homePage;
 	protected LogInPage logInPage;
+	protected CustomerPage customerPage;
 
 	@BeforeMethod
 	public void setUpDriver() {
@@ -61,6 +63,7 @@ public class BaseClass {
 	private void initClasses() {
 		homePage = new HomePage(driver);
 		logInPage = new LogInPage(driver);
+		customerPage = new CustomerPage(driver);
 	}
 	
 	
@@ -71,6 +74,6 @@ public class BaseClass {
 
 	@AfterMethod
 	public void closingDriverSession() {
-		getDriver().quit();
+		//getDriver().quit();
 	}
 }
