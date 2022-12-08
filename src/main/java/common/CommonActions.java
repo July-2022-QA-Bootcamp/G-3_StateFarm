@@ -1,7 +1,11 @@
 package common;
 
 import static org.testng.Assert.*;
+
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -47,11 +51,11 @@ public class CommonActions {
 	
 	public static boolean isPresent(WebElement element) {
 		try {
-			element.isEnabled();
+			element.getSize();
 			Logs.log(element + " <--- has been PRESENT");
 			return true;
 		}catch(NoSuchElementException | NullPointerException e) {
-			Logs.log("ELEMENT NOT FOUND -->" + element); 
+			Logs.log("ELEMENT NOT PRESENT -->" + element); 
 			return false;
 		}
 	}
@@ -59,7 +63,7 @@ public class CommonActions {
 	public static boolean isPresent(By byLocator, WebDriver driver) {
 		List<WebElement> elements = driver.findElements(byLocator);
 		if(elements.size() == 0) {
-			Logs.log("ELEMENT NOT FOUND -->" + byLocator);
+			Logs.log("ELEMENT NOT PRESENT -->" + byLocator);
 			return false;
 		}else {
 			Logs.log(elements.get(0) + " <--- has been PRESENT");
@@ -102,8 +106,18 @@ public class CommonActions {
 			Logs.log(value + " : has been selected for ---> " + element);
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
-			Logs.log("ELEMENT NOT FOUND -->" + element);
+			Logs.log("ELEMENT NOT FOUND IN DROPDOWN -->" + element);
 			fail();
 		}
+	}
+	
+	public static void windowHandles(WebDriver driver) {
+	String mainWindow = driver.getWindowHandle();
+	 Set<String> windows = driver.getWindowHandles();
+	Iterator  it	= windows.iterator();
+		while(it.hasNext()) {
+		String childWindow=(String) it.next();
+		driver.switchTo().window(childWindow);
+			}
 	}
 }
