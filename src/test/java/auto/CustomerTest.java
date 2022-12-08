@@ -9,7 +9,7 @@ public class CustomerTest extends BaseClass {
 	@Test
 	
 	public void customergetQoute() {
-		customerPage.cuctomerSteps(null, null, null, null, null, null, null, null);
+		customerPage.customerSteps("Shaim", "Khalid", null, null, null, null, null, null);
 		
 		
 		
