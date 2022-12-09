@@ -9,6 +9,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.CustomerPage;
+import pages.HomeInsurencePage;
 import pages.HomePage;
 import pages.LogInPage;
 import utils.Configuration;
@@ -22,7 +23,9 @@ public class BaseClass {
 	protected HomePage homePage;
 	protected LogInPage logInPage;
 	protected CustomerPage customerPage;
-
+	protected HomeInsurencePage homeInsurencePage;
+	
+	
 	@BeforeMethod
 	public void setUpDriver() {
 		initDriver();
@@ -64,6 +67,7 @@ public class BaseClass {
 		homePage = new HomePage(driver);
 		logInPage = new LogInPage(driver);
 		customerPage = new CustomerPage(driver);
+		homeInsurencePage = new HomeInsurencePage(driver);
 	}
 	
 	

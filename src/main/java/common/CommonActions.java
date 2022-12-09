@@ -116,7 +116,7 @@ public class CommonActions {
 	 Set<String> windows = driver.getWindowHandles();
 	Iterator  it	= windows.iterator();
 		while(it.hasNext()) {
-		String childWindow=(String) it.next();
+		String childWindow=(String) it.next(); 
 		driver.switchTo().window(childWindow);
 			}
 	}
