@@ -45,13 +45,12 @@ public class BaseClass {
 	protected LogInPage logInPage;
 	protected CustomerPage customerPage;
 	protected HomeInsurencePage homeInsurencePage;
-	
+
 	@BeforeSuite
 	public void initiatinExtentReport() {
 		extent = ExtentManager.getInstance();
 	}
-	
-	
+
 	@Parameters("browser")
 	@BeforeMethod
 	public void setUpDriver(String browser) {
@@ -71,24 +70,23 @@ public class BaseClass {
 		ExtentTestManager.startTest(method.getName());
 		ExtentTestManager.getTest().assignCategory(className);
 	}
-	
+
 	@AfterMethod
 	public void afterEachTest(ITestResult result) {
-		for(String testName : result.getMethod().getGroups()) {
+		for (String testName : result.getMethod().getGroups()) {
 			ExtentTestManager.getTest().assignCategory(testName);
 		}
-		if(result.getStatus() == ITestResult.SUCCESS) {
+		if (result.getStatus() == ITestResult.SUCCESS) {
 			ExtentTestManager.getTest().log(Status.PASS, "Test Passed");
-		}else if(result.getStatus() == ITestResult.FAILURE) {
+		} else if (result.getStatus() == ITestResult.FAILURE) {
 			ExtentTestManager.getTest().log(Status.FAIL, "Test Failed");
 			ExtentTestManager.getTest().log(Status.FAIL, result.getThrowable());
 			ExtentTestManager.getTest().addScreenCaptureFromPath(takeScreenShot(result.getName()));
-		}else {
+		} else {
 			ExtentTestManager.getTest().log(Status.SKIP, "Test Skipped");
 		}
 	}
-	
-	
+
 	private void initDriver(String browser) {
 		switch (browser) {
 		case CHROME:
@@ -112,16 +110,14 @@ public class BaseClass {
 			break;
 		}
 	}
-	
+
 	private void initClasses() {
 		homePage = new HomePage(driver);
 		logInPage = new LogInPage(driver);
 		customerPage = new CustomerPage(driver);
 		homeInsurencePage = new HomeInsurencePage(driver);
 	}
-	
-	
-	
+
 	public WebDriver getDriver() {
 		return driver;
 	}
@@ -130,32 +126,32 @@ public class BaseClass {
 	public void closingDriverSession() {
 		getDriver().quit();
 	}
-	
+
 	@AfterSuite
 	public void closeReport() {
 		extent.flush();
 	}
-	
+
 	public String takeScreenShot(String testName) {
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("_MMddyyyy_hhmmss");
 		File folder = new File("test-output/screenShots");
-		if(!folder.exists()) {
+		if (!folder.exists()) {
 			String path = new File("test-output").getAbsolutePath();
 			new File(path + "/screenShots").mkdir();
 			new File(path + "/screenShots").setExecutable(true);
 		}
-		File localFile = new File("test-output/screenShots/" + testName + format.format(date) +".png");
+		File localFile = new File("test-output/screenShots/" + testName + format.format(date) + ".png");
 		TakesScreenshot ss = (TakesScreenshot) driver;
 		File driverSS = ss.getScreenshotAs(OutputType.FILE);
 		try {
 			Files.copy(driverSS, localFile);
 			Logs.log("Screen Shot captured at \n" + localFile.getAbsolutePath());
-		}catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Logs.log("Error occurs during taking ScreenShot..!");
 		}
 		return localFile.getAbsolutePath();
 	}
-	
+
 }

@@ -26,7 +26,7 @@ public class CommonActions {
 			fail();
 		}
 	}
-	
+
 	public static void clear(WebElement element) {
 		try {
 			element.clear();
@@ -37,7 +37,7 @@ public class CommonActions {
 			fail();
 		}
 	}
-	
+
 	public static void click(WebElement element) {
 		try {
 			element.click();
@@ -48,49 +48,49 @@ public class CommonActions {
 			fail();
 		}
 	}
-	
+
 	public static boolean isPresent(WebElement element) {
 		try {
 			element.getSize();
 			Logs.log(element + " <--- has been PRESENT");
 			return true;
-		}catch(NoSuchElementException | NullPointerException e) {
-			Logs.log("ELEMENT NOT PRESENT -->" + element); 
+		} catch (NoSuchElementException | NullPointerException e) {
+			Logs.log("ELEMENT NOT PRESENT -->" + element);
 			return false;
 		}
 	}
-	
+
 	public static boolean isPresent(By byLocator, WebDriver driver) {
 		List<WebElement> elements = driver.findElements(byLocator);
-		if(elements.size() == 0) {
+		if (elements.size() == 0) {
 			Logs.log("ELEMENT NOT PRESENT -->" + byLocator);
 			return false;
-		}else {
+		} else {
 			Logs.log(elements.get(0) + " <--- has been PRESENT");
 			return true;
 		}
 	}
-	
+
 	public static boolean isDisplayed(WebElement element) {
-		if(element.isDisplayed()) {
+		if (element.isDisplayed()) {
 			Logs.log(element + " <--- is VISIBLE");
 			return true;
-		}else {
+		} else {
 			Logs.log(element + " <--- NOT VISIBLE");
 			return false;
 		}
 	}
-	
+
 	public static void assertGetText(WebElement element, String expected) {
-		if(element != null) {
+		if (element != null) {
 			Logs.log(element + " <--- has text = " + element.getText());
 			assertEquals(element.getText(), expected);
-		}else {
+		} else {
 			Logs.log("ELEMENT NOT FOUND -->" + element);
 			fail();
 		}
 	}
-	
+
 	public static void sleep(int secs) {
 		try {
 			Thread.sleep(secs);
@@ -98,8 +98,8 @@ public class CommonActions {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void selectDropdown(WebElement element,String value) {
+
+	public static void selectDropdown(WebElement element, String value) {
 		try {
 			Select select = new Select(element);
 			select.selectByValue(value);
@@ -110,14 +110,14 @@ public class CommonActions {
 			fail();
 		}
 	}
-	
+
 	public static void windowHandles(WebDriver driver) {
-	String mainWindow = driver.getWindowHandle();
-	 Set<String> windows = driver.getWindowHandles();
-	Iterator  it	= windows.iterator();
-		while(it.hasNext()) {
-		String childWindow=(String) it.next(); 
-		driver.switchTo().window(childWindow);
-			}
+		String mainWindow = driver.getWindowHandle();
+		Set<String> windows = driver.getWindowHandles();
+		Iterator it = windows.iterator();
+		while (it.hasNext()) {
+			String childWindow = (String) it.next();
+			driver.switchTo().window(childWindow);
+		}
 	}
 }

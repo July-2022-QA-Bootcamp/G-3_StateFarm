@@ -9,11 +9,12 @@ import static common.CommonActions.*;
 
 public class CustomerPage {
 	CommonWaits waits;
-	
+
 	public CustomerPage(WebDriver driver) {
-		waits= new CommonWaits(driver);
+		waits = new CommonWaits(driver);
 		PageFactory.initElements(driver, this);
 	}
+
 	@FindBy(xpath = "//input[@id='Client_FirstName']")
 	WebElement firstNamElement;
 	@FindBy(xpath = "//input[@id='Client_LastName']")
@@ -34,31 +35,28 @@ public class CustomerPage {
 	WebElement personalElement;
 	@FindBy(xpath = "//div[@class='next-button-wrap']")
 	WebElement nextbuttonElement;
-	
-	
-	public void customerSteps(String firstName, String lastName, String dob, String address, String city, String stat, String county, String number, String Cell) {
-		
+
+	public void customerSteps(String firstName, String lastName, String dob, String address, String city, String stat,
+			String county, String number, String Cell) {
+
 		input(firstNamElement, firstName);
 		input(lastNamElement, lastName);
 		input(dobElement, dob);
 		input(addressElement, address);
 		input(cityElement, city);
-		if(isPresent(statElement)&& isPresent(statElement)) {
+		if (isPresent(statElement) && isPresent(statElement)) {
 			selectDropdown(statElement, stat);
 		}
-		if(isPresent(countyDropElement) && isDisplayed(countyDropElement)) {
+		if (isPresent(countyDropElement) && isDisplayed(countyDropElement)) {
 			selectDropdown(countyDropElement, county);
 		}
-		//input(countyDropElement, county);
+		// input(countyDropElement, county);
 		input(cellularNumberElement, number);
-		if(isPresent(personalElement)&&isDisplayed(personalElement)) {
+		if (isPresent(personalElement) && isDisplayed(personalElement)) {
 			selectDropdown(personalElement, Cell);
 		}
 		click(nextbuttonElement);
-	
+
 	}
-	
-	
-	
-	
+
 }
